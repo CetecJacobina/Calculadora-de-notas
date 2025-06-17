@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de Notas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h2{
+        text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .input-group {
+      margin: 10px 0;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      margin: 10px 5px 0 0;
+      padding: 10px;
+      width: 48%;
+      border: none;
+      border-radius: 5px;
+      background-color: #0037cf;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    @media (max-width: 500px) {
+      button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Calculadora de Notas</h2>
+
+    <div>
+      <button onclick="mostrar('segunda')">Segunda Chamada</button>
+      <button onclick="mostrar('recuperacao')">Recuperação</button>
+    </div>
+
+    <div id="segunda" style="display: none;">
+      <div class="input-group">
+        <label>Trabalhos/Atividades:</label>
+        <input type="number" id="trabalhos" placeholder="max 25"/>
+      </div>
+      <div class="input-group">
+        <label>Plataforma:</label>
+        <input type="number" id="plataforma" placeholder="max 25"/>
+      </div>
+      <div class="input-group">
+        <label>Prova:</label>
+        <input type="number" id="prova"placeholder="max 50" />
+      </div>
+      <button onclick="calcularSegunda()">Calcular Segunda Chamada</button>
+    </div>
+
+    <div id="recuperacao" style="display: none;">
+      <div class="input-group">
+        <label>Nota final após Segunda Chamada:</label>
+        <input type="number" id="notaFinal" />
+      </div>
+      <button onclick="calcularRecuperacao()">Calcular Recuperação</button>
+    </div>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function mostrar(tipo) {
+      document.getElementById('segunda').style.display = tipo === 'segunda' ? 'block' : 'none';
+      document.getElementById('recuperacao').style.display = tipo === 'recuperacao' ? 'block' : 'none';
+      document.getElementById('resultado').innerText = '';
+    }
+
+    function calcularSegunda() {
+      const trab = parseFloat(document.getElementById('trabalhos').value) || 0;
+      const plat = parseFloat(document.getElementById('plataforma').value) || 0;
+      const prova = parseFloat(document.getElementById('prova').value) || 0;
+
+      const parc1 = trab + plat;
+      const parc2 = prova;
+      const pontosNecessarios = Math.max(0, 70 - Math.max(parc1, parc2));
+
+      document.getElementById('resultado').innerText =
+        `Você precisa fazer ${pontosNecessarios.toFixed(2)} pontos ou mais para alcançar a média.`;
+    }
+
+    function calcularRecuperacao() {
+      const notaFinal = parseFloat(document.getElementById('notaFinal').value) || 0;
+      const nrec = Math.max(0, 120 - notaFinal);
+
+      document.getElementById('resultado').innerText =
+        `Você precisa fazer ${nrec.toFixed(2)} pontos ou mais para alcançar a média.`;
+    }
+  </script>
+</body>
+</html>
