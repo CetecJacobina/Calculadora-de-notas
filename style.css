@@ -1,8 +1,8 @@
   :root {
       --bg-color: #f9f9f9;
       --container-bg: #ffffff;
-      --primary: #0f3bb6;
-      --primary-hover: #0400e7;
+      --primary: #2f51b1;
+      --primary-hover: #3863da;
       --text-color: #000;
       --border-radius: 8px;
     }
@@ -84,6 +84,10 @@
       margin-top: 20px;
       font-size: 1.5rem;
       text-align: center;
+      background-color: rgb(231, 231, 231);
+      padding: 15px;
+      border-radius: 8px;
+      
     }
 
     @media (min-width: 600px) {
